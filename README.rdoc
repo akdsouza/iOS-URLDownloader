@@ -18,32 +18,24 @@ Then inside MyViewController.h define a global downloader variable and attach
 downloader delegate protocol.
 
     ...
-
     @interface MyViewController : UIViewController <URLDownloaderDelegate>
     {
         URLDownloader *downloader;
     }
-
     ...
 
 In your MyViewController.m file first import some librarie, setup downloader
 property and syntesize it.
 
     ...
-
     #import "URLCredential.h"
     #import "URLDownloader.h"
-
     ...
-
     @interface MyViewController()
     @property (retain) URLDownloader *downloader;
     @end
-    
     ...
-
     @synthesize downloader;
-    
     ...
 
 We then initialize downloader variable.
@@ -66,8 +58,8 @@ And finally we can define methods for starting and stopping download.
 
     - (void)startDownload
     {
-        NSString *username = [NSString stringWithString:@"myuser"];
-        NSString *password = [NSString stringWithString:@"mypass"];
+        NSString *username = @"myuser";
+        NSString *password = @"mypass";
         URLCredential *credential = [URLCredential credentialWithUsername:username andPassword:password];
 
         NSURL *url = [NSURL URLWithString:@"http://mydomain.com/file.zip"];
@@ -92,8 +84,5 @@ Don't forget to implement method required by the URLDownloaderDelegate protocol.
     - (void)urlDownloader:(URLDownloader *)downloader didFailWithNotConnectedToInternetError:(NSError *)error;
 
     #optional
-    - (void)urlDownloaderDidStart:(URLDownloader *)downloader;
-    - (void)urlDownloaderDidCancelDownloading:(URLDownloader *)downloader;
     - (void)urlDownloader:(URLDownloader *)downloader didReceiveData:(NSData *)data;
     - (void)urlDownloader:(URLDownloader *)downloader didChangeState:(URLDownloaderState)state;
-
