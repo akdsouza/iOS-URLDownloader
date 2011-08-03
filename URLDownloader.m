@@ -221,11 +221,10 @@
 {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 
-    NSLog(@"[URLDownloader] Download finished");
-
     NSData *data = [NSData dataWithData:self.urlData];
     [self.delegate urlDownloader:self didFinishWithData:data];
 
+    NSLog(@"[URLDownloader] Download finished");
     [self setState:URLDownloaderStateFinished];
 }
 
