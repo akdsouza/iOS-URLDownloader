@@ -33,6 +33,16 @@
 @synthesize urlData;
 @synthesize urlCredential;
 
+#pragma mark Getters
+
+- (BOOL)isInProgress
+{
+    return state == URLDownloaderStateConnecting
+            || state == URLDownloaderStateAuthenticating
+            || state == URLDownloaderStateStarted
+            || state == URLDownloaderStateDownloading;
+}
+
 #pragma mark Setters
 
 - (void)setState:(URLDownloaderState)downloaderState
@@ -106,11 +116,6 @@
 	[urlConnection cancel];
 	
 	NSLog(@"[URLDownloader] Download canceled");
-    if ([self.delegate respondsToSelector:@selector(urlDownloaderDidCancelDownloading:)])
-    {
-        [self.delegate urlDownloaderDidCancelDownloading:self];
-    }
-    
     [self setState:URLDownloaderStateCanceled];
 }
 
@@ -179,12 +184,8 @@
     self.urlResponse = response;
     [self.urlData setLength:0]; // in case of 302
 
-    [self setState:URLDownloaderStateDownloading];
     NSLog(@"[URLDownloader] Downloading %@ ...", [[response URL] absoluteString]);
-    if ([self.delegate respondsToSelector:@selector(urlDownloaderDidStart:)])
-    {
-        [self.delegate urlDownloaderDidStart:self];
-    }
+    [self setState:URLDownloaderStateDownloading];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data

@@ -38,8 +38,6 @@ URLDownloaderState;
 - (void)urlDownloader:(URLDownloader *)downloader didFailWithNotConnectedToInternetError:(NSError *)error;
 
 @optional
-- (void)urlDownloaderDidStart:(URLDownloader *)downloader;
-- (void)urlDownloaderDidCancelDownloading:(URLDownloader *)downloader;
 - (void)urlDownloader:(URLDownloader *)downloader didReceiveData:(NSData *)data;
 - (void)urlDownloader:(URLDownloader *)downloader didChangeState:(URLDownloaderState)state;
 
@@ -69,5 +67,6 @@ URLDownloaderState;
 - (int)fullContentSize;
 - (int)downloadedContentSize;
 - (float)downloadCompleteProcent;
+- (BOOL)isInProgress;
 
 @end
