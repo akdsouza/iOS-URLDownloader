@@ -40,9 +40,9 @@
     if (downloaderState != state) 
     {
         state = downloaderState;
-        if ([self.delegate respondsToSelector:@selector(urlDownloader:didChangeStateTo:)])
+        if ([self.delegate respondsToSelector:@selector(urlDownloader:didChangeState:)])
         {
-            [self.delegate urlDownloader:self didChangeStateTo:downloaderState];
+            [self.delegate urlDownloader:self didChangeState:downloaderState];
         }
     }
 }

@@ -32,16 +32,16 @@ URLDownloaderState;
 @protocol URLDownloaderDelegate <NSObject>
 
 @required
-- (void)urlDownloader:(URLDownloader *)urlDownloader didFinishWithData:(NSData *)data;
-- (void)urlDownloader:(URLDownloader *)urlDownloader didFailOnAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
-- (void)urlDownloader:(URLDownloader *)urlDownloader didFailWithError:(NSError *)error;
-- (void)urlDownloader:(URLDownloader *)urlDownloader didFailWithNotConnectedToInternetError:(NSError *)error;
+- (void)urlDownloader:(URLDownloader *)downloader didFinishWithData:(NSData *)data;
+- (void)urlDownloader:(URLDownloader *)downloader didFailOnAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
+- (void)urlDownloader:(URLDownloader *)downloader didFailWithError:(NSError *)error;
+- (void)urlDownloader:(URLDownloader *)downloader didFailWithNotConnectedToInternetError:(NSError *)error;
 
 @optional
-- (void)urlDownloaderDidStart:(URLDownloader *)urlDownloader;
-- (void)urlDownloaderDidCancelDownloading:(URLDownloader *)urlDownloader;
-- (void)urlDownloader:(URLDownloader *)urlDownloader didReceiveData:(NSData *)data;
-- (void)urlDownloader:(URLDownloader *)urlDownloader didChangeStateTo:(URLDownloaderState)state;
+- (void)urlDownloaderDidStart:(URLDownloader *)downloader;
+- (void)urlDownloaderDidCancelDownloading:(URLDownloader *)downloader;
+- (void)urlDownloader:(URLDownloader *)downloader didReceiveData:(NSData *)data;
+- (void)urlDownloader:(URLDownloader *)downloader didChangeState:(URLDownloaderState)state;
 
 @end
 
