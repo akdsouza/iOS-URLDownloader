@@ -62,8 +62,8 @@ URLDownloaderState;
 
 + (id)downloaderWithDelegate:(id)obj;
 - (id)initWithDelegate:(id)obj;
-- (void)download:(NSURLRequest *)request withCredential:(URLCredential *)credential;
-- (void)cancel;
+- (BOOL)download:(NSURLRequest *)request withCredential:(URLCredential *)credential;
+- (BOOL)cancel;
 - (int)fullContentSize;
 - (int)downloadedContentSize;
 - (float)downloadCompleteProcent;

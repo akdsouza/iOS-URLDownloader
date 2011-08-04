@@ -95,8 +95,10 @@
 
 #pragma mark Actions
 
-- (void)download:(NSURLRequest *)request withCredential:(URLCredential *)credential
+- (BOOL)download:(NSURLRequest *)request withCredential:(URLCredential *)credential
 {
+    if ([self isInProgress]) return NO;
+    
     [self setState:URLDownloaderStateConnecting];
     
     self.urlCredential = credential;
@@ -107,16 +109,21 @@
     [self.urlConnection start];
 	
 	NSLog(@"[URLDownloader] Download started");
+    return YES;
 }
 
-- (void)cancel
+- (BOOL)cancel
 {
+    if (![self isInProgress]) return NO;
+    
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     
 	[urlConnection cancel];
 	
 	NSLog(@"[URLDownloader] Download canceled");
     [self setState:URLDownloaderStateCanceled];
+    
+    return YES;
 }
 
 #pragma mark Information
